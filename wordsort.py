@@ -6,7 +6,7 @@ occurrences = []
 
 choosefile = input("Choose a file: ")
 file = str(choosefile) + ".txt"
-print("selected file: " + str(file))
+print("\nSelected file: " + str(file) + "\n")
 
 with open(file,'rt') as file: #Opens the text file as a read-only text file
 	
