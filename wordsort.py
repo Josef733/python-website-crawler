@@ -6,7 +6,6 @@ occurrences = []
 
 choosefile = input("Choose a file: ")
 file = str(choosefile) + ".txt"
-print("\nSelected file: " + str(file) + "\n")
 
 with open(file,'rt') as file: #Opens the text file as a read-only text file
 	
@@ -16,7 +15,7 @@ with open(file,'rt') as file: #Opens the text file as a read-only text file
 
 for t in content:
     out = t.translate(str.maketrans("","", string.punctuation)) #Filters out puntuation from each element in the list
-    corrcontent.append(out + ":") #The filtered text file is now added into a new list, string by string. Colon is used to seperate occurrenace counter
+    corrcontent.append(out + " : ") #The filtered text file is now added into a new list, string by string. Colon is used to seperate occurrenace counter
 
 corrcontent.sort() #sorting the list to make it easier to compare later
 
@@ -35,4 +34,5 @@ for i in corrcontent:
                 occurrences = list(dict.fromkeys(occurrences))  # filter out duplicate string elements
             countoc = 0 #Reset to 0 if no more identical occurrences
 
+print("\nSelected file: " + str(file) + "\n")
 print(occurrences) #Prints finished list
