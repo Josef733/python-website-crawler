@@ -9,7 +9,7 @@ file = str(choosefile) + ".txt"
 print("selected file: " + str(file))
 
 with open(file,'rt') as file: #Opens the text file as a read-only text file
-
+	
     for line in file:
         for word in line.split():
             content.append(word) #splits up file into individual words and adds each one to the first list.
@@ -29,7 +29,7 @@ for i in corrcontent:
             countoc += 1 #Iterate for first occurrence, and any other following it
 
         else:
-            if countoc > 3:
+            if countoc > 2:
                 a = i + str(countoc) #variable containing the word. and the amount of occurrences it had if more than 3
                 occurrences.append(a) #Add this concatenated string to our new array
                 occurrences = list(dict.fromkeys(occurrences))  # filter out duplicate string elements
