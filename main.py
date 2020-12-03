@@ -7,26 +7,37 @@ a = 0
 
 while (a == 0):
 	
-	url = input("Enter the URL for crawling: ")
+	urls = []
+	b = 0
+
+	while(b == 0):
+		url = input("Enter the URL for crawling: ")
+		urls.append(url)
+		confirmurl = input("Would you like to add another address? ")
+		if (confirmurl == "yes"):
+			b = 0
+		else:
+			b = 1
+
 	level = int(input("Enter the depth of crawling (help in readme): "))
 	
 	regexps = []
-	b = 0
+	c = 0
 
 	add = input("Would you like to add any regular expressions? ")
 
 	if (add == "yes"):
-		while (b == 0):
+		while (c == 0):
 			exp = input("Enter a regular expression: ")
 			regexps.append(exp)
 			confirmexp = input("Would you like to add another expression? ")
 			if (confirmexp == "yes"):
-				b = 0
+				c = 0
 			else:
-				b = 1
+				c = 1
 
 	print("Selected Parameters:\n")
-	print("URL: " + url)
+	print("URLs: " + str(urls))
 	print("Crawling Depth: " + str(level))
 	print("Regular Expressions: "+ str(regexps))
 	confirm = input("Proceed with website crawling (yes/no)? ")
