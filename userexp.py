@@ -1,18 +1,18 @@
 import re
-
+import sys
 
 a = 0
 
 while (a == 0):
 
-userchoice = input("Which file would you like to read from?")
+	userchoice = input("Which file would you like to read from?")
 
-textfile = str(userchoice) + ".txt"
+	textfile = str(userchoice) + ".txt"
 
-file = open(textfile,"rt", encoding='utf8') #Opening the file with utf8 so all the characters are read properly
-content = file.read()
+	file = open(textfile,"rt", encoding='utf8') #Opening the file with utf8 so all the characters are read properly
+	content = file.read()
 
-print("Chosen File: " + str(textfile) "\n")
+	print("Chosen File: " + str(textfile) + "\n")
 
 	regexps = []
 	multilineexps = []
@@ -53,16 +53,18 @@ print("Chosen File: " + str(textfile) "\n")
 
 
 print("Regular Expression Results")
-for i in regexps:
+for i in range(len(regexps)):
 	r1 = re.findall(regexps[i],content)
 	resnum = i + 1
-	print("Result" + str(resnum) + ":\n" + r1)
+	print("Result " + str(resnum) + " from " + regexps[i] + ":")
+	print(r1)
 
 print("Multi-Line Expression Results")
-for j in multilineexps:
-	r2 = re.findall(multilineexps[i],content,re.MULTILINE)
-	mulnum = i + 1
-	print("Result" + str(mulnum) + ":\n" + r2)
+for j in range(len(multilineexps)):
+	r2 = re.findall(multilineexps[j],content,re.MULTILINE)
+	mulnum = j + 1
+	print("Result " + str(mulnum) + " from " + multilineexps[j] + ":")
+	print(r2)
 
 #Save to File (userhoice + "_Regex_Results")
 
