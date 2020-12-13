@@ -1,7 +1,10 @@
 import re
 import sys
+from numpy import savetxt
 
 a = 0
+
+expressions = []
 
 while (a == 0):
 
@@ -56,16 +59,18 @@ print("Regular Expression Results")
 for i in range(len(regexps)):
 	r1 = re.findall(regexps[i],content)
 	resnum = i + 1
-	print("Result " + str(resnum) + " from " + regexps[i] + ":")
-	print(r1)
+	expressions.append("Result " + str(resnum) + " from " + regexps[i] + ":")
+	expressions.append(r1)
 
 print("Multi-Line Expression Results")
 for j in range(len(multilineexps)):
 	r2 = re.findall(multilineexps[j],content,re.MULTILINE)
 	mulnum = j + 1
-	print("Result " + str(mulnum) + " from " + multilineexps[j] + ":")
-	print(r2)
+	expressions.append("Result " + str(mulnum) + " from " + multilineexps[j] + ":")
+	expressions.append(r2)
 
 #Save to File (userhoice + "_Regex_Results")
 
-print("Saved to file.")
+#expressions.astype("int8").tofile(str(choosefile) + "_word_sorted.txt")
+savetxt(str(userchoice) + "_regex_results.txt", expressions, delimiter=',')
+print("Saved to file: " + str(userchoice) + "_regex_results.txt")

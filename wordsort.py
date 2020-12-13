@@ -1,4 +1,5 @@
 import string
+from numpy import savetxt
 
 content = []
 corrcontent = []
@@ -36,3 +37,7 @@ for i in corrcontent:
 
 print("\nSelected file: " + str(file) + "\n")
 print(occurrences) #Prints finished list
+
+#occurrences.astype("int8").tofile(str(choosefile) + "_word_sorted.txt")
+savetxt(str(choosefile) + "_word_sorted.txt", occurrences, delimiter=',')
+print("Saved to file:" + str(choosefile) + "_word_sorted.txt")
