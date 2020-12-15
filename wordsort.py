@@ -1,12 +1,13 @@
 import string
 from numpy import savetxt
+from os.path import abspath
 
 content = []
 corrcontent = []
 occurrences = []
 
 choosefile = input("Choose a file: ")
-file = str(choosefile) + ".txt"
+file = str(choosefile) + ".html"
 
 with open(file,'rt') as file: #Opens the text file as a read-only text file
 	
@@ -40,4 +41,4 @@ print(occurrences) #Prints finished list
 
 #occurrences.astype("int8").tofile(str(choosefile) + "_word_sorted.txt")
 savetxt(str(choosefile) + "_word_sorted.txt", occurrences, delimiter=',')
-print("Saved to file:" + str(choosefile) + "_word_sorted.txt")
+print("Saved to file: " + str(choosefile) + "_word_sorted.txt")

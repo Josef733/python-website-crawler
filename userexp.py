@@ -1,6 +1,7 @@
 import re
 import sys
 from numpy import savetxt
+from os.path import abspath
 
 a = 0
 
@@ -10,7 +11,7 @@ while (a == 0):
 
 	userchoice = input("Which file would you like to read from?")
 
-	textfile = str(userchoice) + ".txt"
+	textfile = str(userchoice) + ".html"
 
 	file = open(textfile,"rt", encoding='utf8') #Opening the file with utf8 so all the characters are read properly
 	content = file.read()
@@ -59,14 +60,14 @@ print("Regular Expression Results")
 for i in range(len(regexps)):
 	r1 = re.findall(regexps[i],content)
 	resnum = i + 1
-	expressions.append("Result " + str(resnum) + " from " + regexps[i] + ":")
+	expressions.append("Result " + str(resnum) + " from " + regexps[i] + ": ")
 	expressions.append(r1)
 
 print("Multi-Line Expression Results")
 for j in range(len(multilineexps)):
 	r2 = re.findall(multilineexps[j],content,re.MULTILINE)
 	mulnum = j + 1
-	expressions.append("Result " + str(mulnum) + " from " + multilineexps[j] + ":")
+	expressions.append("Result " + str(mulnum) + " from " + multilineexps[j] + ": ")
 	expressions.append(r2)
 
 #Save to File (userhoice + "_Regex_Results")
