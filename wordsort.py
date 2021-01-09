@@ -1,6 +1,4 @@
 import string
-from numpy import savetxt
-from os.path import abspath
 
 content = []
 corrcontent = []
@@ -9,10 +7,13 @@ occurrences = []
 choosefile = input("Choose a file: ")
 file = str(choosefile) + ".html"
 
-with open(file,'rt') as file: #Opens the text file as a read-only text file
+with open(file,'rt', encoding="utf8") as file: #Opens the text file as a read-only text file
 	
     for line in file:
-        for word in line.split():
+        indexs = line.find(">")
+        indexf = line.find("</")
+        wordcontent = line[indexs+1:indexf]
+        for word in wordcontent.split():
             content.append(word) #splits up file into individual words and adds each one to the first list.
 
 for t in content:
@@ -37,8 +38,10 @@ for i in corrcontent:
             countoc = 0 #Reset to 0 if no more identical occurrences
 
 print("\nSelected file: " + str(file) + "\n")
-print(occurrences) #Prints finished list
 
-#occurrences.astype("int8").tofile(str(choosefile) + "_word_sorted.txt")
-savetxt(str(choosefile) + "_word_sorted.txt", occurrences, delimiter=',')
+#f = open(str(choosefile) + "_word_sorted.txt", "w")
+#f.write(str(occurrences))
+#f.close()
+with open (str(choosefile) + "_word_sorted.txt", 'w', encoding="utf8") as f:
+	print(*occurrences, sep='\n', file=f)
 print("Saved to file: " + str(choosefile) + "_word_sorted.txt")
