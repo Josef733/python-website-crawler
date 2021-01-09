@@ -1,6 +1,5 @@
 import re
 import sys
-from numpy import savetxt
 from os.path import abspath
 
 a = 0
@@ -12,9 +11,6 @@ while (a == 0):
 	userchoice = input("Which file would you like to read from?")
 
 	textfile = str(userchoice) + ".html"
-
-	file = open(textfile,"rt", encoding='utf8') #Opening the file with utf8 so all the characters are read properly
-	content = file.read()
 
 	print("Chosen File: " + str(textfile) + "\n")
 
@@ -55,23 +51,34 @@ while (a == 0):
 	else:
 		sys.exit()
 
+	with open(textfile, 'rt', encoding="utf8") as file:  # Opens the text file as a read-only text file
+		resnum = 0
+		for line in file:
+			indexs = line.find(">")
+			indexf = line.find("</")
+			wordcontent = line[indexs + 1:indexf]
 
-print("Regular Expression Results")
-for i in range(len(regexps)):
-	r1 = re.findall(regexps[i],content)
-	resnum = i + 1
-	expressions.append("Result " + str(resnum) + " from " + regexps[i] + ": ")
-	expressions.append(r1)
+			resnum = resnum + 1
 
-print("Multi-Line Expression Results")
-for j in range(len(multilineexps)):
-	r2 = re.findall(multilineexps[j],content,re.MULTILINE)
-	mulnum = j + 1
-	expressions.append("Result " + str(mulnum) + " from " + multilineexps[j] + ": ")
-	expressions.append(r2)
 
-#Save to File (userhoice + "_Regex_Results")
+			for i in range(len(regexps)):
+				r1 = re.findall(regexps[i],wordcontent)
+				expressions.append("Line " + str(resnum) + " with " + regexps[i] + ": " )
+				expressions.append(r1)
 
-#expressions.astype("int8").tofile(str(choosefile) + "_word_sorted.txt")
-savetxt(str(userchoice) + "_regex_results.txt", expressions, delimiter=',')
+
+			for j in range(len(multilineexps)): #Not working properly
+				continue
+				r2 = re.findall(multilineexps[j],wordcontent,re.MULTILINE)
+				mulnum = j + 1
+				expressions.append("Result " + str(mulnum) + " from " + multilineexps[j] + ": ")
+				expressions.append(r2)
+
+		print("Regular Expression Results Added")
+
+with open (str(userchoice) + "_regex_results.txt", 'w', encoding="utf8") as f:
+	print(*expressions, sep='\n', file=f)
+#f = open(str(userchoice) + "_regex_results.txt", "w")
+#f.write(str(expressions))
+#f.close()
 print("Saved to file: " + str(userchoice) + "_regex_results.txt")
